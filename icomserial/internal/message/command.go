@@ -48,17 +48,42 @@ func skipToNextCommand() bytesHandler {
 	}
 }
 
-func handleCommand(conf *transceiver.Configuration) bytesHandler {
+func getCommand(command *byte) bytesHandler {
 	return func(data []byte) (int, error) {
 		if len(data) < 1 {
 			return 0, errorwrap.WrapError(ErrorParsing, nil, "message: expected command")
 		}
 
-		switch data[0] {
+		*command = data[0]
+
+		return 1, nil
+	}
+}
+
+func runCommand(command *byte, conf *transceiver.Configuration) bytesHandler {
+	return func(data []byte) (int, error) {
+		if command == nil {
+			return 0, errorwrap.WrapError(ErrorParsing, nil, "message: handleCommand passed nil command pointer")
+		}
+
+		commandDeref := *command
+
+		switch commandDeref {
 		default:
 			return skipToNextCommand()(data)
 		case sendFrequency:
 			return handleFrequency(conf)(data)
 		}
+	}
+}
+
+func handleCommand(conf *transceiver.Configuration) bytesHandler {
+	return func(data []byte) (int, error) {
+		var command byte
+
+		return handleBytes(data,
+			getCommand(&command),
+			runCommand(&command, conf),
+		)
 	}
 }
