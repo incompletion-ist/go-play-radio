@@ -16,6 +16,11 @@ package message
 
 import "go.incompletion.ist/play-radio/errorwrap"
 
+const (
+	defaultTransceiverAddress byte = 0xA2
+	defaultControllerAddress  byte = 0xE0
+)
+
 func handleAddress(address *byte) bytesHandler {
 	return func(data []byte) (int, error) {
 		if len(data) < 1 {

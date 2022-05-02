@@ -14,6 +14,8 @@
 
 package message
 
+import "go.incompletion.ist/play-radio/transceiver"
+
 // bytesHandler is a function that performs an action on a slice of bytes,
 // returning the number of bytes that were handled.
 type bytesHandler func([]byte) (int, error)
@@ -32,4 +34,34 @@ func handleBytes(data []byte, handlers ...bytesHandler) (int, error) {
 	}
 
 	return totalCount, nil
+}
+
+func handleNextMessage(conf *transceiver.Configuration) bytesHandler {
+	return func(data []byte) (int, error) {
+		// checking source/target addresses not implemented
+		var throwawayAddress byte
+
+		return handleBytes(data,
+			expectFullPreamble(),
+			handleAddress(&throwawayAddress),
+			handleAddress(&throwawayAddress),
+			handleCommand(conf),
+			expectEom(),
+		)
+	}
+}
+
+func handleAllMessages(data []byte, conf *transceiver.Configuration) error {
+	totalHandledCount := 0
+
+	for len(data) > totalHandledCount {
+		singleHandledCount, err := handleNextMessage(conf)(data[totalHandledCount:])
+		if err != nil {
+			return err
+		}
+
+		totalHandledCount += singleHandledCount
+	}
+
+	return nil
 }
