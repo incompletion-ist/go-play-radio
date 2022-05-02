@@ -18,6 +18,11 @@ import (
 	"reflect"
 
 	"go.incompletion.ist/play-radio/errorwrap"
+	"go.incompletion.ist/play-radio/transceiver"
+)
+
+const (
+	sendFrequency byte = 0x01
 )
 
 func skipToNextCommand() bytesHandler {
@@ -43,7 +48,7 @@ func skipToNextCommand() bytesHandler {
 	}
 }
 
-func handleCommand() bytesHandler {
+func handleCommand(conf *transceiver.Configuration) bytesHandler {
 	return func(data []byte) (int, error) {
 		if len(data) < 1 {
 			return 0, errorwrap.WrapError(ErrorParsing, nil, "message: expected command")
@@ -52,6 +57,8 @@ func handleCommand() bytesHandler {
 		switch data[0] {
 		default:
 			return skipToNextCommand()(data)
+		case sendFrequency:
+			return handleFrequency(conf)(data)
 		}
 	}
 }
