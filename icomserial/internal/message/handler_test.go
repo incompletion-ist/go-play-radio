@@ -69,7 +69,7 @@ func Test_handleAllMessages(t *testing.T) {
 
 	for _, test := range tests {
 		var conf transceiver.Configuration
-		err := handleAllMessages(test.input, &conf)
+		err := HandleData(test.input, &conf)
 		gotError := err != nil
 		gotFrequency := conf.Frequency.Get()
 

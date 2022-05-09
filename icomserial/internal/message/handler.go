@@ -51,7 +51,7 @@ func handleNextMessage(conf *transceiver.Configuration) bytesHandler {
 	}
 }
 
-func handleAllMessages(data []byte, conf *transceiver.Configuration) error {
+func HandleData(data []byte, conf *transceiver.Configuration) error {
 	totalHandledCount := 0
 
 	for len(data) > totalHandledCount {
