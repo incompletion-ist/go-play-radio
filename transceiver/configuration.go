@@ -14,10 +14,13 @@
 
 package transceiver
 
-import "go.incompletion.ist/play-radio/operating"
+import (
+	"go.incompletion.ist/explicit/value"
+	"go.incompletion.ist/play-radio/operating"
+)
 
 // Configuration defines an operating configuration.
 type Configuration struct {
-	Mode      operating.Mode
-	Frequency operating.Frequency
+	Mode      value.Value[operating.Mode]
+	Frequency value.Value[operating.Frequency]
 }
