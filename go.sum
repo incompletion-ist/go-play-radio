@@ -1,2 +1,4 @@
+github.com/incompletion-ist/go-logger v0.0.1-pre h1:wSzt1zZ/qQz+9h7o5diUN6ufB9KTf/MUsI6iGudcGqE=
+github.com/incompletion-ist/go-logger v0.0.1-pre/go.mod h1:YRHmgGisJvXt5FeOF6Eck3wTXom0MZq8MhjDngXDsXw=
 github.com/incompletion-ist/go-wrapped-error v0.0.2-pre h1:gD1Hone+kcFX9cmed9dMZBMgX2ciJ7xerM+wVXypy+w=
 github.com/incompletion-ist/go-wrapped-error v0.0.2-pre/go.mod h1:4+QNVrYL+oxVBow+fN5vl1+qTyPdfr7PuM2CTrOIKbs=
