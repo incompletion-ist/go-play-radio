@@ -1,2 +1,3 @@
 # go-play-radio
-Amateur Radio Module for Go
+
+Go standard types for radio libraries.
