@@ -1,3 +1,6 @@
+# github.com/incompletion-ist/go-deject v0.0.2-pre
+## explicit; go 1.18
+github.com/incompletion-ist/go-deject/deject
 # github.com/incompletion-ist/go-logger v0.0.1-pre
 ## explicit; go 1.18
 github.com/incompletion-ist/go-logger/logger
