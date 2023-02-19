@@ -12,7 +12,7 @@ type OpenCloser interface {
 	//
 	// providedRegistry is a Registry of dependencies available to the RegistryOpenCloser. It may be
 	// used to provide loggers, etc.
-	Open(ctx context.Context, providedRegistry *deject.Registry) (*deject.Registry, error)
+	Open(context.Context, ...Option) (*deject.Registry, error)
 
 	// Close triggers a graceful close.
 	Close() error
