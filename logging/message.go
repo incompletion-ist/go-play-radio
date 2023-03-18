@@ -5,6 +5,14 @@ import "fmt"
 // Message represents a log message.
 type Message string
 
+// FormatMessage returns a Message by passing format and args to fmt.Sprintf. It is a convenience
+// to avoid having to do:
+//
+//  Message(fmt.Sprintf("some message with value: %s", value))
+func FormatMessage(format string, args ...any) Message {
+	return Message(fmt.Sprintf(format, args...))
+}
+
 // WithLevel returns a new Message with level's name prepended. It
 // returns the original Message and an error if level is unknown.
 func (message Message) WithLevel(level Level) (Message, error) {
