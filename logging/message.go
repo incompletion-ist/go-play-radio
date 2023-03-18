@@ -8,7 +8,7 @@ type Message string
 // FormatMessage returns a Message by passing format and args to fmt.Sprintf. It is a convenience
 // to avoid having to do:
 //
-//  Message(fmt.Sprintf("some message with value: %s", value))
+//	Message(fmt.Sprintf("some message with value: %s", value))
 func FormatMessage(format string, args ...any) Message {
 	return Message(fmt.Sprintf(format, args...))
 }
