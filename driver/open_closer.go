@@ -14,9 +14,14 @@ type OpenCloser interface {
 	// used to provide loggers, etc.
 	Open(context.Context, ...Option) (*deject.Registry, error)
 
-	// Close triggers a graceful close.
+	// Close triggers a graceful close with a nil CloseError. Returns an error if encountered
+	// while attempting to perform the Close.
 	Close() error
 
 	// Closed returns a channel that will be closed when the registry is closed.
-	Closed() chan<- struct{}
+	Closed() <-chan struct{}
+
+	// CloseError returns the error that triggered the close. Returns nil if not closed, or if it
+	// was a graceful (non-error triggered) close.
+	CloseError() error
 }
